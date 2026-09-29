@@ -7,7 +7,9 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 find_package(SDL3 REQUIRED)
 
 add_executable(text-editor
-    src/main.c)
+    src/main.c
+    src/components/windows.c
+    )
 
 target_include_directories(text-editor PRIVATE include)
 
