@@ -1,0 +1,63 @@
+#include "cursor.h"
+#include "scratch_pad.h"
+#include <stdlib.h>
+#include <stdio.h>
+
+
+
+
+
+
+static PadItem cursor={.data='\0',.next=NULL,.prev=NULL};
+
+
+
+PadItem* get_cursor(){
+return &cursor;
+}
+
+
+
+void move_cursor(CursorDir direction){
+   
+    switch (direction)
+    {
+    case LEFT:
+        if(cursor.prev!=NULL){
+            PadItem* prev=cursor.prev;
+            prev->next=cursor.next;
+            cursor.next=prev;
+            cursor.prev=prev->prev;
+            prev->prev=&cursor;
+            
+            if(cursor.prev==NULL){
+                // update scatch_pad head to cursor
+            }
+
+        }
+
+        break;
+
+    case RIGHT:
+        if(cursor.next!=NULL){
+            PadItem* next=cursor.next;
+            next->prev=cursor.prev;
+            cursor.prev=next;
+            cursor.next=next->next;
+            if(cursor.next==NULL){
+                // update scatch_pad tail to cursor
+            }
+            next->next=&cursor;
+        }    
+        break;
+
+    case TOP:
+        printf("Top cursor movement not impl");
+        break;    
+    default:
+        printf("Down cursor movement not impl");
+        break;
+    }
+
+
+}

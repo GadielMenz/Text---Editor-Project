@@ -9,6 +9,8 @@ find_package(SDL3 REQUIRED)
 add_executable(text-editor
     src/main.c
     src/components/windows.c
+    src/components/cursor.c
+    src/components/scratch_pad.c
     )
 
 target_include_directories(text-editor PRIVATE include)
