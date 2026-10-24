@@ -1,5 +1,6 @@
 #include "cursor.h"
 #include "scratch_pad.h"
+#include "renderer.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -10,7 +11,19 @@
 
 static PadItem cursor={.data='\0',.next=NULL,.prev=NULL};
 
+void set_up_cursor(){
+cursor.pixel_data=calloc(font_w*font_h,sizeof(bool));
+bool (*cursor_pixel)[font_w]=(bool (*)[font_w])cursor.pixel_data;
+for (size_t i = 0; i < font_h; i++)
+{
+    for (size_t a = 0; a < (font_w/2); a++)
+    {
+        cursor_pixel[i][a]=true;
+    }
+    
+}
 
+}
 
 PadItem* get_cursor(){
 return &cursor;

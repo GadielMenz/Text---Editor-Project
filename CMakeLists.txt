@@ -11,6 +11,8 @@ add_executable(text-editor
     src/components/windows.c
     src/components/cursor.c
     src/components/scratch_pad.c
+    src/components/renderer.c
+
     )
 
 target_include_directories(text-editor PRIVATE include)

@@ -6,5 +6,6 @@
 
 void create_window();
 size_t get_window_w_or_h(bool is_w);
+void update_window();
 
 #endif

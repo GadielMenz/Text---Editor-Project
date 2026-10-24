@@ -2,6 +2,8 @@
 #define SCARTCHPAD
 
 
+
+
 typedef struct PadItem PadItem;
 
 typedef struct PadItem
@@ -9,6 +11,7 @@ typedef struct PadItem
    char data; 
    PadItem* prev;
    PadItem* next;
+   bool* pixel_data;
 
 } PadItem;
 
@@ -16,6 +19,7 @@ typedef struct PadItem
 
 extern PadItem* head;
 extern PadItem* tail;
+
 
 void scratch_pad_init();
 

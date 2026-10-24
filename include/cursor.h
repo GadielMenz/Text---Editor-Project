@@ -12,5 +12,6 @@ LEFT
 }CursorDir;
 
 PadItem* get_cursor();
+void set_up_cursor();
 
 #endif

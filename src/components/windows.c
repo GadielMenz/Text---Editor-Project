@@ -1,15 +1,46 @@
 #include "windows.h"
+#include "renderer.h"
 
 
 
 // these win sizes are in pixels
-static size_t win_w=1100;
-static size_t win_h=1000;
+static int win_w=1100;
+static int win_h=1000;
 static SDL_Window* window=NULL;
 
 size_t get_window_w_or_h(bool is_w){
     if(is_w) return win_w;
     return win_h;
+}
+
+
+
+// copies whatever is in the frame buffer onto the window
+void update_window(){
+    if(window==NULL || frame_bufffer==NULL){
+        printf("Window Update Error: window or frame buffer not initialized\n");
+        return;
+    }
+
+    SDL_Surface* win_surface=SDL_GetWindowSurface(window);
+    if(win_surface==NULL){
+        printf("Window Update Error:%s\n",SDL_GetError());
+        return;
+    }
+
+    // wraps the frame buffer (no copy), each pixel is 0xXXRRGGBB
+    SDL_Surface* frame_surface=SDL_CreateSurfaceFrom(win_w,win_h,SDL_PIXELFORMAT_XRGB8888,frame_bufffer,win_w*sizeof(uint32_t));
+    if(frame_surface==NULL){
+        printf("Window Update Error:%s\n",SDL_GetError());
+        return;
+    }
+
+    SDL_BlitSurface(frame_surface,NULL,win_surface,NULL);
+    SDL_DestroySurface(frame_surface);
+
+    if(!SDL_UpdateWindowSurface(window)){
+        printf("Window Update Error:%s\n",SDL_GetError());
+    }
 }
 
 static bool event_handler(SDL_Event event){
@@ -18,6 +49,7 @@ switch (event.type)
 {
 case SDL_EVENT_KEY_DOWN:
     printf("A key was entered\n");
+  
     break;
 
 case SDL_EVENT_WINDOW_CLOSE_REQUESTED:
@@ -39,12 +71,13 @@ case SDL_EVENT_WINDOW_RESTORED:
         return false;
     }
     
-    SDL_GetWindowSizeInPixels(window,(int*)&win_w,(int*)&win_h);
-    printf("New sizes w=%lu and h=%lu\n",win_w,win_h);
+    SDL_GetWindowSizeInPixels(window,&win_w,&win_h);
+    free(frame_bufffer);
+    renderer_init();
+    printf("New sizes w=%i and h=%i\n",win_w,win_h);
     break;    
 
 }
-
 return true;
 }
 
@@ -55,7 +88,13 @@ bool is_win_open=true;
 while (is_win_open)
 {
     if(SDL_PollEvent(&events)){
+    
         is_win_open= event_handler(events);
+        if(is_win_open){
+        render();
+        update_window();
+        }
+          
     }
 }
 
