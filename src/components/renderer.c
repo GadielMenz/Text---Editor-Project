@@ -42,7 +42,9 @@ while(current!=NULL){
 bool (*pixel_data)[font_w]=(bool (*)[font_w])current->pixel_data;
 size_t inner_col=col;
 
-for (size_t i = 0; i < font_h; i++)
+
+
+if(current->data!=' ')for (size_t i = 0; i < font_h; i++)
 {
     size_t inner_r=row;
 

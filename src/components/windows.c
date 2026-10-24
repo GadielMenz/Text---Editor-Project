@@ -1,5 +1,6 @@
 #include "windows.h"
 #include "renderer.h"
+#include "cursor.h"
 
 
 
@@ -13,6 +14,28 @@ size_t get_window_w_or_h(bool is_w){
     return win_h;
 }
 
+static void keyb_input_handler(SDL_Keycode event){
+
+           switch (event)
+        {
+        case SDLK_LEFT:
+            move_cursor(LEFT);
+            break;
+        case SDLK_RIGHT:
+    
+            move_cursor(RIGHT);
+            break;
+        case SDLK_UP:
+     
+            
+            break;
+        case SDLK_DOWN:
+         
+            
+            break;
+        }
+
+}
 
 
 // copies whatever is in the frame buffer onto the window
@@ -49,7 +72,7 @@ switch (event.type)
 {
 case SDL_EVENT_KEY_DOWN:
     printf("A key was entered\n");
-  
+    keyb_input_handler(event.key.key);
     break;
 
 case SDL_EVENT_WINDOW_CLOSE_REQUESTED:

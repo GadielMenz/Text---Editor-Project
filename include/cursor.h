@@ -13,5 +13,6 @@ LEFT
 
 PadItem* get_cursor();
 void set_up_cursor();
+void move_cursor(CursorDir direction);
 
 #endif

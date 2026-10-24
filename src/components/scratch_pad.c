@@ -29,7 +29,7 @@ PadItem* last_item_prev=tail->prev;
 tail->prev=new_item;
 new_item->prev=last_item_prev;
 new_item->next=tail;
-last_item_prev->next=new_item;
+if(last_item_prev!=NULL)last_item_prev->next=new_item;
 
 // get pixel data of character
 

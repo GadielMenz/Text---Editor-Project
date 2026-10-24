@@ -62,6 +62,9 @@ void move_cursor(CursorDir direction){
             }
             next->next=&cursor;
         }    
+        else{
+            add_item_to_pad(' ');
+        }
         break;
 
     case TOP:
