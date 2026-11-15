@@ -41,6 +41,7 @@ void move_cursor(CursorDir direction){
             prev->next=cursor.next;
             cursor.next=prev;
             cursor.prev=prev->prev;
+            prev->prev->next=&cursor;
             prev->prev=&cursor;
             
             if(cursor.prev==NULL){
@@ -62,9 +63,9 @@ void move_cursor(CursorDir direction){
             }
             next->next=&cursor;
         }    
-        else{
-            add_item_to_pad(' ');
-        }
+        // else{
+        //     add_item_to_pad(' ');
+        // }
         break;
 
     case TOP:
