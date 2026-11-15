@@ -25,5 +25,7 @@ void scratch_pad_init();
 
 PadItem* add_item_to_pad(char data);
 
+bool* get_char_pixel_data(char c);
+
 
 #endif

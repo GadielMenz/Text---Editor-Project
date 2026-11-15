@@ -44,7 +44,7 @@ size_t inner_col=col;
 
 
 
-if(current->data!=' ')for (size_t i = 0; i < font_h; i++)
+if(current->pixel_data!=NULL)for (size_t i = 0; i < font_h; i++)
 {
     size_t inner_r=row;
 
