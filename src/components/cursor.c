@@ -16,7 +16,7 @@ cursor.pixel_data=calloc(font_w*font_h,sizeof(bool));
 bool (*cursor_pixel)[font_w]=(bool (*)[font_w])cursor.pixel_data;
 for (size_t i = 0; i < font_h; i++)
 {
-    for (size_t a = 0; a < (font_w/2); a++)
+    for (size_t a = 0; a < (font_w/8); a++)
     {
         cursor_pixel[i][a]=true;
     }

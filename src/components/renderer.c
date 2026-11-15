@@ -64,7 +64,8 @@ row=0;
 col+=font_h;
 }
 else{
-row+=font_w;
+if(current->data=='\0')row+=font_w/8;    
+else row+=font_w;
 }
 
 current=current->next;
