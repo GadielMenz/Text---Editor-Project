@@ -41,11 +41,12 @@ void move_cursor(CursorDir direction){
             prev->next=cursor.next;
             cursor.next=prev;
             cursor.prev=prev->prev;
-            prev->prev->next=&cursor;
+            if(prev->prev!=NULL) prev->prev->next=&cursor;
             prev->prev=&cursor;
             
             if(cursor.prev==NULL){
                 // update scatch_pad head to cursor
+                head=&cursor;
             }
 
         }
@@ -56,10 +57,13 @@ void move_cursor(CursorDir direction){
         if(cursor.next!=NULL){
             PadItem* next=cursor.next;
             next->prev=cursor.prev;
+
+            if(cursor.prev->next!=NULL)cursor.prev->next=next;
             cursor.prev=next;
             cursor.next=next->next;
             if(cursor.next==NULL){
                 // update scatch_pad tail to cursor
+                tail=&cursor;
             }
             next->next=&cursor;
         }    
