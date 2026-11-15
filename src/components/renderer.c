@@ -6,8 +6,8 @@
 
 
 
-const size_t font_w=30; // do not change this value 
-const size_t font_h=40; // do not change this value 
+const size_t font_w=25; // do not change this value 
+const size_t font_h=25; // do not change this value 
 
 
 const uint32_t font_color=UINT32_MAX;
