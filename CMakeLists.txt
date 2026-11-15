@@ -3,6 +3,7 @@ project(text-editor C)
 
 set(CMAKE_C_STANDARD 23)
 set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # lets the editor see include paths and flags
 
 find_package(SDL3 REQUIRED)
 

@@ -1,0 +1,16 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json",
+            "includePath": [
+                "${workspaceFolder}/include",
+                "/usr/include"
+            ],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c23",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}
