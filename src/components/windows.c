@@ -1,6 +1,7 @@
 #include "windows.h"
 #include "renderer.h"
 #include "cursor.h"
+#include "scratch_pad.h"
 
 
 
@@ -14,26 +15,28 @@ size_t get_window_w_or_h(bool is_w){
     return win_h;
 }
 
-static void keyb_input_handler(SDL_Keycode event){
+static void keyb_input_handler(SDL_Event event){
 
-           switch (event)
+    if(event.type==SDL_EVENT_TEXT_INPUT){
+        add_item_to_pad(*(event.text.text));
+        
+    }else switch (event.key.key)
         {
         case SDLK_LEFT:
             move_cursor(LEFT);
             break;
         case SDLK_RIGHT:
-    
             move_cursor(RIGHT);
             break;
         case SDLK_UP:
      
-            
             break;
         case SDLK_DOWN:
          
-            
             break;
+        
         }
+
 
 }
 
@@ -71,8 +74,9 @@ static bool event_handler(SDL_Event event){
 switch (event.type)
 {
 case SDL_EVENT_KEY_DOWN:
+case SDL_EVENT_TEXT_INPUT:
     printf("A key was entered\n");
-    keyb_input_handler(event.key.key);
+    keyb_input_handler(event);
     break;
 
 case SDL_EVENT_WINDOW_CLOSE_REQUESTED:
@@ -107,7 +111,7 @@ return true;
 static  void setup_event_sys(){
 SDL_Event events;
 bool is_win_open=true;
-
+SDL_StartTextInput(window);
 while (is_win_open)
 {
     if(SDL_PollEvent(&events)){
