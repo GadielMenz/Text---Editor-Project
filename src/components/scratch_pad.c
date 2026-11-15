@@ -165,17 +165,18 @@ tail=head;
 
 
 PadItem* add_item_to_pad(char data){
-PadItem* new_item=calloc(1,sizeof(PadItem));
+PadItem *cur= get_cursor();
+
+PadItem* new_item= calloc(1,sizeof(PadItem));
 new_item->data=data;
 
 if(head==tail){
     head=new_item;
 }
-
-PadItem* last_item_prev=tail->prev;
-tail->prev=new_item;
+PadItem* last_item_prev=cur->prev;
+cur->prev=new_item;
 new_item->prev=last_item_prev;
-new_item->next=tail;
+new_item->next=cur;
 if(last_item_prev!=NULL)last_item_prev->next=new_item;
 
 new_item->pixel_data=get_char_pixel_data(data);

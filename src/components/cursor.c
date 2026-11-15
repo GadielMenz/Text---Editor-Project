@@ -38,6 +38,8 @@ void move_cursor(CursorDir direction){
     case LEFT:
         if(cursor.prev!=NULL){
             PadItem* prev=cursor.prev;
+            if (&cursor==tail) tail=prev;
+
             prev->next=cursor.next;
             cursor.next=prev;
             cursor.prev=prev->prev;
@@ -56,6 +58,7 @@ void move_cursor(CursorDir direction){
     case RIGHT:
         if(cursor.next!=NULL){
             PadItem* next=cursor.next;
+            if(&cursor==head) head=next;
             next->prev=cursor.prev;
 
             if(cursor.prev->next!=NULL)cursor.prev->next=next;
